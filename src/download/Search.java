@@ -1,23 +1,32 @@
 package download;
 
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 
-import org.json.JSONObject;
-import org.json.JSONTokener;
+import com.alibaba.fastjson.JSONObject;
 
 public class Search {
 
-    public static void main(String[] args) throws IOException {
-        String keyword = "how to make apple pie filling";
+    public static String getKey() {
+        
+        return null;
+    }
+
+    public static String getID(String keyword) throws IOException {
         keyword = keyword.replace(" ", "+");
-        String url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=rating&q=" + keyword + "&key=YOUR_YOUTUBE_API_KEY";
-        Document doc = Jsoup.connect(url).timeout(10 * 1000).get();
-        String getJson = doc.text();
-        JSONObject jsonObject = (JSONObject) new JSONTokener(getJson).nextValue();
-        System.out.println(jsonObject.getString("videoId"));
+        String url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=rating&q=" + keyword + "&key=" + getKey();
+        String doc = Jsoup.connect(url).ignoreContentType(true).execute().body();
+        
+        doc = doc.substring(doc.indexOf("\"videoId\": ") + 12);
+        doc = doc.substring(0, doc.indexOf("\""));
+
+        return doc;
+    }
+
+    public static void main(String[] args) throws IOException, ParseException {
     }
 
 }
