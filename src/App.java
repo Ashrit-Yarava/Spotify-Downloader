@@ -162,31 +162,31 @@ public class App extends JFrame {
         GridBagConstraints gbcAbout = new GridBagConstraints();
         pnAbout.setLayout(gbAbout);
 
-         String text = "Spotify Downloader" + "<br>" +
-         "By: Ashrit Yarava" + "<br><br>" + 
-         "<a href='https://github.com/Ashrit-Yarava/Spotify-Downloader'>Github</a>";
+        String text = "Spotify Downloader" + "<br>" + "By: Ashrit Yarava" + "<br><br>"
+                + "<a href='https://github.com/Ashrit-Yarava/Spotify-Downloader'>Github</a>";
 
-        lbAboutLabel = new JLabel("<html><div style='text-align: center;'>" + text + "</div></html>", SwingConstants.CENTER);
+        lbAboutLabel = new JLabel("<html><div style='text-align: center;'>" + text + "</div></html>",
+                SwingConstants.CENTER);
         lbAboutLabel.addMouseListener(new MouseInputAdapter() {
-         @Override
-         public void mouseClicked(MouseEvent e) {
-             try {
-                 Desktop.getDesktop().browse(new URI("https://github.com/Ashrit-Yarava/Spotify-Downloader"));
-             } catch (URISyntaxException | IOException ex) {
-                 System.exit(103);
-             }
-         }
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://github.com/Ashrit-Yarava/Spotify-Downloader"));
+                } catch (URISyntaxException | IOException ex) {
+                    System.exit(103);
+                }
+            }
 
-         @Override
-         public void mouseEntered(MouseEvent e) {
-            setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-         }
-      
-         @Override
-         public void mouseExited(MouseEvent e) {
-            setCursor(Cursor.getDefaultCursor());
-         }
-      });
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                setCursor(Cursor.getDefaultCursor());
+            }
+        });
         gbcAbout.gridx = 0;
         gbcAbout.gridy = 0;
         gbcAbout.gridwidth = 20;
