@@ -1,137 +1,179 @@
-import javax.swing.JFrame;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.JPanel;
-import javax.swing.BorderFactory;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import javax.swing.JTabbedPane;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.URISyntaxException;
-
-import javax.swing.JCheckBox;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.event.MouseInputAdapter;
-
-import java.awt.event.*;
-import java.net.URI;
 import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+import javax.swing.event.*;
 
 public class App extends JFrame {
     static App theApp;
 
-    JPanel pnPanel;
-    JTabbedPane tbpTabPanel;
+    JPanel MainPanel;
+    JTabbedPane Panel0;
 
-    class MainPanel extends JPanel implements ActionListener {
-        JCheckBox cbOption2;
-        JCheckBox cbOption1;
-        JTextField tfApiKey;
-        JLabel lbYoutubeLabel;
-        JTextField tfPlaylist;
-        JButton btStartButton;
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(400, 300);
+    }
 
-        public MainPanel() {
+    class downloadPanel extends JPanel implements ActionListener {
+        JButton startButton;
+        JTextField playlistText;
+        JLabel spotifyLabel;
+        JTextField spotifyText;
+        JLabel youtubeLabel;
+        JTextField youtubeText;
+
+        public downloadPanel() {
             super();
 
-            GridBagLayout gbMainPanel = new GridBagLayout();
-            GridBagConstraints gbcMainPanel = new GridBagConstraints();
-            setLayout(gbMainPanel);
+            GridBagLayout gbdownloadPanel = new GridBagLayout();
+            GridBagConstraints gbcdownloadPanel = new GridBagConstraints();
+            setLayout(gbdownloadPanel);
 
-            cbOption2 = new JCheckBox("Generate Log.");
-            cbOption2.setSelected(true);
-            gbcMainPanel.gridx = 0;
-            gbcMainPanel.gridy = 1;
-            gbcMainPanel.gridwidth = 6;
-            gbcMainPanel.gridheight = 1;
-            gbcMainPanel.fill = GridBagConstraints.BOTH;
-            gbcMainPanel.weightx = 1;
-            gbcMainPanel.weighty = 1;
-            gbcMainPanel.anchor = GridBagConstraints.NORTH;
-            gbMainPanel.setConstraints(cbOption2, gbcMainPanel);
-            add(cbOption2);
+            startButton = new JButton("Start Download");
+            startButton.addActionListener(this);
+            gbcdownloadPanel.gridx = 0;
+            gbcdownloadPanel.gridy = 3;
+            gbcdownloadPanel.gridwidth = 2;
+            gbcdownloadPanel.gridheight = 1;
+            gbcdownloadPanel.fill = GridBagConstraints.BOTH;
+            gbcdownloadPanel.weightx = 1;
+            gbcdownloadPanel.weighty = 1;
+            gbcdownloadPanel.anchor = GridBagConstraints.NORTH;
+            gbdownloadPanel.setConstraints(startButton, gbcdownloadPanel);
+            add(startButton);
 
-            cbOption1 = new JCheckBox("Organize files into directories (based on artist).");
-            cbOption1.setSelected(true);
-            gbcMainPanel.gridx = 0;
-            gbcMainPanel.gridy = 0;
-            gbcMainPanel.gridwidth = 6;
-            gbcMainPanel.gridheight = 1;
-            gbcMainPanel.fill = GridBagConstraints.BOTH;
-            gbcMainPanel.weightx = 1;
-            gbcMainPanel.weighty = 1;
-            gbcMainPanel.anchor = GridBagConstraints.NORTH;
-            gbMainPanel.setConstraints(cbOption1, gbcMainPanel);
-            add(cbOption1);
+            playlistText = new JTextField();
+            gbcdownloadPanel.gridx = 0;
+            gbcdownloadPanel.gridy = 2;
+            gbcdownloadPanel.gridwidth = 2;
+            gbcdownloadPanel.gridheight = 1;
+            gbcdownloadPanel.fill = GridBagConstraints.BOTH;
+            gbcdownloadPanel.weightx = 1;
+            gbcdownloadPanel.weighty = 1;
+            gbcdownloadPanel.anchor = GridBagConstraints.NORTH;
+            gbdownloadPanel.setConstraints(playlistText, gbcdownloadPanel);
+            add(playlistText);
 
-            tfApiKey = new JTextField();
-            gbcMainPanel.gridx = 2;
-            gbcMainPanel.gridy = 2;
-            gbcMainPanel.gridwidth = 4;
-            gbcMainPanel.gridheight = 1;
-            gbcMainPanel.fill = GridBagConstraints.BOTH;
-            gbcMainPanel.weightx = 1;
-            gbcMainPanel.weighty = 0;
-            gbcMainPanel.anchor = GridBagConstraints.CENTER;
-            gbMainPanel.setConstraints(tfApiKey, gbcMainPanel);
-            add(tfApiKey);
+            spotifyLabel = new JLabel("Spotify API");
+            gbcdownloadPanel.gridx = 0;
+            gbcdownloadPanel.gridy = 1;
+            gbcdownloadPanel.gridwidth = 1;
+            gbcdownloadPanel.gridheight = 1;
+            gbcdownloadPanel.fill = GridBagConstraints.BOTH;
+            gbcdownloadPanel.weightx = 1;
+            gbcdownloadPanel.weighty = 1;
+            gbcdownloadPanel.anchor = GridBagConstraints.CENTER;
+            gbdownloadPanel.setConstraints(spotifyLabel, gbcdownloadPanel);
+            add(spotifyLabel);
 
-            lbYoutubeLabel = new JLabel("Youtube API Key");
-            lbYoutubeLabel.setIconTextGap(15);
-            gbcMainPanel.gridx = 0;
-            gbcMainPanel.gridy = 2;
-            gbcMainPanel.gridwidth = 2;
-            gbcMainPanel.gridheight = 1;
-            gbcMainPanel.fill = GridBagConstraints.BOTH;
-            gbcMainPanel.weightx = 1;
-            gbcMainPanel.weighty = 1;
-            gbcMainPanel.anchor = GridBagConstraints.CENTER;
-            gbMainPanel.setConstraints(lbYoutubeLabel, gbcMainPanel);
-            add(lbYoutubeLabel);
+            spotifyText = new JTextField();
+            gbcdownloadPanel.gridx = 1;
+            gbcdownloadPanel.gridy = 1;
+            gbcdownloadPanel.gridwidth = 1;
+            gbcdownloadPanel.gridheight = 1;
+            gbcdownloadPanel.fill = GridBagConstraints.BOTH;
+            gbcdownloadPanel.weightx = 1;
+            gbcdownloadPanel.weighty = 1;
+            gbcdownloadPanel.anchor = GridBagConstraints.NORTH;
+            gbdownloadPanel.setConstraints(spotifyText, gbcdownloadPanel);
+            add(spotifyText);
 
-            tfPlaylist = new JTextField();
-            gbcMainPanel.gridx = 0;
-            gbcMainPanel.gridy = 3;
-            gbcMainPanel.gridwidth = 6;
-            gbcMainPanel.gridheight = 2;
-            gbcMainPanel.fill = GridBagConstraints.BOTH;
-            gbcMainPanel.weightx = 1;
-            gbcMainPanel.weighty = 1;
-            gbcMainPanel.anchor = GridBagConstraints.CENTER;
-            gbMainPanel.setConstraints(tfPlaylist, gbcMainPanel);
-            add(tfPlaylist);
+            youtubeLabel = new JLabel("Youtube API");
+            gbcdownloadPanel.gridx = 0;
+            gbcdownloadPanel.gridy = 0;
+            gbcdownloadPanel.gridwidth = 1;
+            gbcdownloadPanel.gridheight = 1;
+            gbcdownloadPanel.fill = GridBagConstraints.BOTH;
+            gbcdownloadPanel.weightx = 1;
+            gbcdownloadPanel.weighty = 1;
+            gbcdownloadPanel.anchor = GridBagConstraints.NORTH;
+            gbdownloadPanel.setConstraints(youtubeLabel, gbcdownloadPanel);
+            add(youtubeLabel);
 
-            btStartButton = new JButton("Start Download");
-            btStartButton.addActionListener(this);
-            gbcMainPanel.gridx = 0;
-            gbcMainPanel.gridy = 5;
-            gbcMainPanel.gridwidth = 6;
-            gbcMainPanel.gridheight = 2;
-            gbcMainPanel.fill = GridBagConstraints.BOTH;
-            gbcMainPanel.weightx = 1;
-            gbcMainPanel.weighty = 1;
-            gbcMainPanel.anchor = GridBagConstraints.CENTER;
-            gbMainPanel.setConstraints(btStartButton, gbcMainPanel);
-            add(btStartButton);
+            youtubeText = new JTextField();
+            gbcdownloadPanel.gridx = 1;
+            gbcdownloadPanel.gridy = 0;
+            gbcdownloadPanel.gridwidth = 1;
+            gbcdownloadPanel.gridheight = 1;
+            gbcdownloadPanel.fill = GridBagConstraints.BOTH;
+            gbcdownloadPanel.weightx = 1;
+            gbcdownloadPanel.weighty = 1;
+            gbcdownloadPanel.anchor = GridBagConstraints.NORTH;
+            gbdownloadPanel.setConstraints(youtubeText, gbcdownloadPanel);
+            add(youtubeText);
         }
 
         public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == btStartButton) {
-                // Action for btStartButton
+            if (e.getSource() == startButton) {
+                // Action for startButton
             }
         }
     }
 
-    MainPanel pnMainPanel;
+    downloadPanel downloadPanel;
 
-    JPanel pnAbout;
-    JLabel lbAboutLabel;
+    class aboutPanel extends JPanel implements ActionListener {
+        JButton YoutubeButton;
+        JButton SpotifyButton;
+        JLabel AboutText;
+
+        public aboutPanel() {
+            super();
+
+            GridBagLayout gbaboutPanel = new GridBagLayout();
+            GridBagConstraints gbcaboutPanel = new GridBagConstraints();
+            setLayout(gbaboutPanel);
+
+            YoutubeButton = new JButton("Youtube API Guide");
+            YoutubeButton.addActionListener(this);
+            gbcaboutPanel.gridx = 0;
+            gbcaboutPanel.gridy = 12;
+            gbcaboutPanel.gridwidth = 20;
+            gbcaboutPanel.gridheight = 4;
+            gbcaboutPanel.fill = GridBagConstraints.BOTH;
+            gbcaboutPanel.weightx = 1;
+            gbcaboutPanel.weighty = 0;
+            gbcaboutPanel.anchor = GridBagConstraints.NORTH;
+            gbaboutPanel.setConstraints(YoutubeButton, gbcaboutPanel);
+            add(YoutubeButton);
+
+            SpotifyButton = new JButton("Spotify API Guide");
+            SpotifyButton.addActionListener(this);
+            gbcaboutPanel.gridx = 0;
+            gbcaboutPanel.gridy = 16;
+            gbcaboutPanel.gridwidth = 20;
+            gbcaboutPanel.gridheight = 4;
+            gbcaboutPanel.fill = GridBagConstraints.BOTH;
+            gbcaboutPanel.weightx = 1;
+            gbcaboutPanel.weighty = 0;
+            gbcaboutPanel.anchor = GridBagConstraints.NORTH;
+            gbaboutPanel.setConstraints(SpotifyButton, gbcaboutPanel);
+            add(SpotifyButton);
+
+            AboutText = new JLabel("Spotify Downloader");
+            gbcaboutPanel.gridx = 0;
+            gbcaboutPanel.gridy = 0;
+            gbcaboutPanel.gridwidth = 20;
+            gbcaboutPanel.gridheight = 12;
+            gbcaboutPanel.fill = GridBagConstraints.BOTH;
+            gbcaboutPanel.weightx = 1;
+            gbcaboutPanel.weighty = 1;
+            gbcaboutPanel.anchor = GridBagConstraints.NORTH;
+            gbaboutPanel.setConstraints(AboutText, gbcaboutPanel);
+            add(AboutText);
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == YoutubeButton) {
+                // Action for YoutubeButton
+            }
+            if (e.getSource() == SpotifyButton) {
+                // Action for SpotifyButton
+            }
+        }
+    }
+
+    aboutPanel aboutPanel;
 
     public static void main(String args[]) {
         try {
@@ -144,74 +186,37 @@ public class App extends JFrame {
         theApp = new App();
     }
 
+
+
     public App() {
-        super("TITLE");
+        super("Spotify Downloader");
 
-        pnPanel = new JPanel();
-        GridBagLayout gbPanel = new GridBagLayout();
-        GridBagConstraints gbcPanel = new GridBagConstraints();
-        pnPanel.setLayout(gbPanel);
+        MainPanel = new JPanel();
+        GridBagLayout gbMainPanel = new GridBagLayout();
+        GridBagConstraints gbcMainPanel = new GridBagConstraints();
+        MainPanel.setLayout(gbMainPanel);
 
-        tbpTabPanel = new JTabbedPane();
+        Panel0 = new JTabbedPane();
 
-        pnMainPanel = new MainPanel();
-        tbpTabPanel.addTab("Downloader", pnMainPanel);
+        downloadPanel = new downloadPanel();
+        Panel0.addTab("Downloader", downloadPanel);
 
-        pnAbout = new JPanel();
-        GridBagLayout gbAbout = new GridBagLayout();
-        GridBagConstraints gbcAbout = new GridBagConstraints();
-        pnAbout.setLayout(gbAbout);
-
-        String text = "Spotify Downloader" + "<br>" + "By: Ashrit Yarava" + "<br><br>"
-                + "<a href='https://github.com/Ashrit-Yarava/Spotify-Downloader'>Github</a>";
-
-        lbAboutLabel = new JLabel("<html><div style='text-align: center;'>" + text + "</div></html>",
-                SwingConstants.CENTER);
-        lbAboutLabel.addMouseListener(new MouseInputAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                try {
-                    Desktop.getDesktop().browse(new URI("https://github.com/Ashrit-Yarava/Spotify-Downloader"));
-                } catch (URISyntaxException | IOException ex) {
-                    System.exit(103);
-                }
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                setCursor(Cursor.getDefaultCursor());
-            }
-        });
-        gbcAbout.gridx = 0;
-        gbcAbout.gridy = 0;
-        gbcAbout.gridwidth = 20;
-        gbcAbout.gridheight = 20;
-        gbcAbout.fill = GridBagConstraints.BOTH;
-        gbcAbout.weightx = 1;
-        gbcAbout.weighty = 1;
-        gbcAbout.anchor = GridBagConstraints.NORTH;
-        gbAbout.setConstraints(lbAboutLabel, gbcAbout);
-        pnAbout.add(lbAboutLabel);
-        tbpTabPanel.addTab("About", pnAbout);
-        gbcPanel.gridx = 0;
-        gbcPanel.gridy = 0;
-        gbcPanel.gridwidth = 1;
-        gbcPanel.gridheight = 1;
-        gbcPanel.fill = GridBagConstraints.BOTH;
-        gbcPanel.weightx = 1;
-        gbcPanel.weighty = 1;
-        gbcPanel.anchor = GridBagConstraints.NORTH;
-        gbPanel.setConstraints(tbpTabPanel, gbcPanel);
-        pnPanel.add(tbpTabPanel);
+        aboutPanel = new aboutPanel();
+        Panel0.addTab("About & Help", aboutPanel);
+        gbcMainPanel.gridx = 0;
+        gbcMainPanel.gridy = 0;
+        gbcMainPanel.gridwidth = 30;
+        gbcMainPanel.gridheight = 20;
+        gbcMainPanel.fill = GridBagConstraints.BOTH;
+        gbcMainPanel.weightx = 1;
+        gbcMainPanel.weighty = 1;
+        gbcMainPanel.anchor = GridBagConstraints.NORTH;
+        gbMainPanel.setConstraints(Panel0, gbcMainPanel);
+        MainPanel.add(Panel0);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        setContentPane(pnPanel);
+        setContentPane(MainPanel);
         pack();
         setVisible(true);
     }
