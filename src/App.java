@@ -1,6 +1,10 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+
 import javax.swing.event.*;
 
 public class App extends JFrame {
@@ -165,10 +169,20 @@ public class App extends JFrame {
 
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == YoutubeButton) {
-                Desktop.getDesktop().browse(theURI);
+                try {
+                    Desktop.getDesktop().browse(
+                            new URL("https://ashrit-yarava.github.io/Spotify-Downloader/youtube-token.html").toURI());
+                } catch (IOException | URISyntaxException e1) {
+                    e1.printStackTrace();
+                }
             }
             if (e.getSource() == SpotifyButton) {
-                Desktop.getDesktop().browse(theURI);
+                try {
+                    Desktop.getDesktop().browse(
+                            new URL("https://ashrit-yarava.github.io/Spotify-Downloader/spotify-token.html").toURI());
+                } catch (IOException | URISyntaxException e1) {
+                    e1.printStackTrace();
+                }
             }
         }
     }
