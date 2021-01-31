@@ -165,10 +165,10 @@ public class App extends JFrame {
 
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == YoutubeButton) {
-                // Action for YoutubeButton
+                Desktop.getDesktop().browse(theURI);
             }
             if (e.getSource() == SpotifyButton) {
-                // Action for SpotifyButton
+                Desktop.getDesktop().browse(theURI);
             }
         }
     }
