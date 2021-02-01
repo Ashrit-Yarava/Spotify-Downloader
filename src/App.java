@@ -2,6 +2,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
@@ -15,7 +16,7 @@ public class App extends JFrame {
 
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(400, 300);
+        return new Dimension(475, 300);
     }
 
     class downloadPanel extends JPanel implements ActionListener {
@@ -109,7 +110,7 @@ public class App extends JFrame {
 
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == startButton) {
-                // Action for startButton
+                Main.download(youtubeText.getText(), spotifyText.getText(), playlistText.getText());
             }
         }
     }
@@ -154,7 +155,32 @@ public class App extends JFrame {
             gbaboutPanel.setConstraints(SpotifyButton, gbcaboutPanel);
             add(SpotifyButton);
 
-            AboutText = new JLabel("Spotify Downloader");
+            String text = "Spotify Downloader" + "<br>" + "By: Ashrit Yarava" + "<br><br>"
+                    + "<a href='https://github.com/Ashrit-Yarava/Spotify-Downloader'>Github</a>";
+
+            AboutText = new JLabel("<html><div style='text-align: center;'>" + text + "</div></html>",
+                    SwingConstants.CENTER);
+            AboutText.addMouseListener(new MouseInputAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    try {
+                        Desktop.getDesktop().browse(new URI("https://github.com/Ashrit-Yarava/Spotify-Downloader"));
+                    } catch (URISyntaxException | IOException ex) {
+                        System.exit(103);
+                    }
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    setCursor(Cursor.getDefaultCursor());
+                }
+            });
+
             gbcaboutPanel.gridx = 0;
             gbcaboutPanel.gridy = 0;
             gbcaboutPanel.gridwidth = 20;
@@ -199,8 +225,6 @@ public class App extends JFrame {
         }
         theApp = new App();
     }
-
-
 
     public App() {
         super("Spotify Downloader");
