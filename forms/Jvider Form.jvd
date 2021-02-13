@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<jpanel name="MainPanel" title="" class="0" bordered="0" scrollbars="0" x="0" y="0" dx="0" dy="0" wx="0" wy="0" fill="0" anchor="0" insets="0,0,0,0" maxx="30" maxy="20">
+    <jtabbedpane name="Panel0" title="new" x="0" y="0" dx="30" dy="20" wx="1" wy="1" fill="1" anchor="11" insets="0,0,0,0" maxx="20" maxy="20">
+        <jpanel name="downloadPanel" title="Downloader" class="1" bordered="0" scrollbars="0" x="0" y="0" dx="0" dy="0" wx="0" wy="0" fill="0" anchor="0" insets="0,0,0,0" maxx="2" maxy="4">
+            <jbutton name="startButton" title="Start Download" x="0" y="3" dx="2" dy="1" wx="1" wy="1" fill="1" anchor="11" insets="0,0,20,0">
+            </jbutton>
+            <jtextfield name="playlistText" x="0" y="2" dx="2" dy="1" wx="1" wy="1" fill="1" anchor="11" insets="0,0,0,0">
+            </jtextfield>
+            <jlabel name="spotifyLabel" title="Spotify API" scrollbars="0" x="0" y="1" dx="1" dy="1" wx="1" wy="1" fill="1" anchor="10" insets="0,0,0,0">
+            </jlabel>
+            <jtextfield name="spotifyText" x="1" y="1" dx="1" dy="1" wx="1" wy="1" fill="1" anchor="11" insets="0,0,0,0">
+            </jtextfield>
+            <jlabel name="youtubeLabel" title="Youtube API" scrollbars="0" x="0" y="0" dx="1" dy="1" wx="1" wy="1" fill="1" anchor="11" insets="0,0,0,0">
+            </jlabel>
+            <jtextfield name="youtubeText" x="1" y="0" dx="1" dy="1" wx="1" wy="1" fill="1" anchor="11" insets="20,0,0,0">
+            </jtextfield>
+        </jpanel>
+        <jpanel name="aboutPanel" title="About & Help" class="1" bordered="0" scrollbars="0" x="0" y="0" dx="0" dy="0" wx="0" wy="0" fill="0" anchor="0" insets="0,0,0,0" maxx="20" maxy="20">
+        </jpanel>
+    </jtabbedpane>
+</jpanel>
